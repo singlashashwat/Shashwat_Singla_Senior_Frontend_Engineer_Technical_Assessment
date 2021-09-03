@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 //Material-UI
-import { Grid, Divider, Typography, makeStyles } from "@material-ui/core";
+import { Divider, Typography, makeStyles, Chip } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 //Interface
 import { Doctor } from "../../types/interfaces";
@@ -27,6 +27,7 @@ function DoctorData(props: Props) {
       <Typography variant="h6" gutterBottom>
         {data?.Name}
       </Typography>
+      <Chip label={data?.["Service Type"]} variant="outlined" />
       <Typography className={classes.address}>
         <LocationOnIcon fontSize={"small"} />
         {data?.Address1 + "," + data?.Address2}
