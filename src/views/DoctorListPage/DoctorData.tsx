@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
   address: {
     fontSize: "1.25rem",
   },
+  text: {
+    color: "#707188",
+  },
 }));
 interface Props {
   data: Doctor;
@@ -28,7 +31,9 @@ function DoctorData(props: Props) {
         <LocationOnIcon fontSize={"small"} />
         {data?.Address1 + "," + data?.Address2}
       </Typography>
-      <Typography>{data?.Telephone1}</Typography>
+      <Typography variant="body2" className={classes.text}>
+        {data?.Telephone1}
+      </Typography>
     </React.Fragment>
   );
 }
