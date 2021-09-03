@@ -2,31 +2,33 @@ import React, { useEffect, useState } from "react";
 //Material-UI
 import { Grid, makeStyles } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { csv } from "d3";
+import { csv, DSVRowArray } from "d3";
 import EditableList from "../../components/EditableList";
 import DoctorData from "./DoctorData";
 // @ts-ignore
 import csvFilePath from "./doctors.csv";
-import { Doctor } from "../../types/interfaces";
+import { Doctor, FilterKey } from "../../types/interfaces";
 
 const useStyles = makeStyles((theme) => ({}));
 function DoctorListPage() {
   const classes = useStyles();
-  const [cvsData, setCsvData] = useState<any>([]);
-  const [PageData, setPageData] = useState<any>([]);
+  const [cvsData, setCsvData] = useState<any>();
+  const [pageData, setPageData] = useState<any>([]);
+  const [district, setDistrict] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     csv(csvFilePath).then((data) => {
       setCsvData(data);
       setPageData(data?.slice(0, 10));
-      let region = [];
+      let region: any = [];
       for (var i = 0; i < data.length; i++) {
         if (region.indexOf(data[i].Region) < 0) {
           region.push(data[i].Region);
         }
       }
-      // console.log("regio", region);
+      setDistrict(region);
+      console.log("regio", region);
       let locList: any = [];
       // data.forEach(function (loc) {
       //   if (loc.Region === val && locList.indexOf(loc.Location) < 0) {
@@ -35,7 +37,6 @@ function DoctorListPage() {
       //   }
       // });
     });
-    // loadData()
   }, []);
 
   const handleChangePage = (event: any, value: number) => {
@@ -43,14 +44,18 @@ function DoctorListPage() {
     setPageData(cvsData?.slice((value - 1) * 10, (value - 1) * 10 + 10));
   };
 
+  const handleFilter = (event: object, value: FilterKey | FilterKey[]) => {
+    console.log("value", value);
+  };
+
   return (
     <React.Fragment>
       <Grid item md={4} sm={12} xs={12}>
-        <EditableList />
+        <EditableList district={district} handleFilter={handleFilter} />
       </Grid>
       <Grid container spacing={4}>
-        {PageData.length > 0 &&
-          PageData.map((data: Doctor, index: number) => (
+        {pageData.length > 0 &&
+          pageData.map((data: Doctor, index: number) => (
             <Grid item key={index} md={6} sm={12} xs={12}>
               <DoctorData data={data} />
             </Grid>
@@ -60,7 +65,7 @@ function DoctorListPage() {
       <Grid container justifyContent="center">
         <Pagination
           count={
-            cvsData?.length % 10 != 0
+            cvsData?.length % 10 !== 0
               ? Math.floor(cvsData?.length / 10) + 1
               : cvsData?.length / 10
           }

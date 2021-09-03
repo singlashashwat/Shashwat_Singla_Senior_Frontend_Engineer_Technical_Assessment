@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 //Material-UI
 import { Grid, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { FilterKey } from "../../types/interfaces";
 
-function EditableList() {
-  const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
+interface Props {
+  district: string[];
+  handleFilter: (event: object, value: FilterKey | FilterKey[]) => void;
+}
+function EditableList(props: Props) {
+  const { district, handleFilter } = props;
+  let data = [
+    { region: "New Terriroties", location: "Tsing Yi" },
+    { region: "New Terriroties", location: "Tai Po" },
+    { region: "Kowloon", location: "Mongkok" },
   ];
   return (
     <Autocomplete
       multiple
-      id="tags-standard"
-      options={top100Films}
-    //   getOptionLabel={(option) => option.title}
-      defaultValue={[top100Films[13]]}
+      options={data}
+      onChange={handleFilter}
+      groupBy={(option) => option.region}
+      getOptionLabel={(option) => option.location}
       renderInput={(params) => (
         <TextField
           {...params}

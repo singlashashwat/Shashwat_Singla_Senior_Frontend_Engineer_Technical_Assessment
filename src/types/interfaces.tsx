@@ -34,3 +34,8 @@ export interface Doctor {
   Partner: string;
   Medicine: string;
 }
+
+export interface FilterKey {
+  region: string;
+  location: string;
+}
