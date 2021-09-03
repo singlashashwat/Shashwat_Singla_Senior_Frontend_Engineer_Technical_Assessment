@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { FilterKey } from "../../types/interfaces";
 
 interface Props {
-  district: string[];
+  district: any;
   handleFilter: (event: object, value: FilterKey | FilterKey[]) => void;
 }
 function EditableList(props: Props) {
@@ -19,7 +19,7 @@ function EditableList(props: Props) {
   return (
     <Autocomplete
       multiple
-      options={data}
+      options={district ? district : data}
       onChange={handleFilter}
       groupBy={(option) => option.region}
       getOptionLabel={(option) => option.location}

@@ -26,72 +26,95 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
   },
 }));
+
+let cvsData: any = "";
 function DoctorListPage() {
   const classes = useStyles();
-  const [cvsData, setCsvData] = useState<any>();
+  const [showData, setShowData] = useState<any>();
   const [pageData, setPageData] = useState<any>([]);
   const [district, setDistrict] = useState<string[]>([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     csv(csvFilePath).then((data) => {
-      setCsvData(data);
+      cvsData = data;
+      setShowData(data);
       setPageData(data?.slice(0, 10));
       let region: any = [];
+      let districtlist: any = [];
       for (var i = 0; i < data.length; i++) {
-        if (region.indexOf(data[i].Region) < 0) {
+        const found: any = districtlist.some((el: any) =>
+          el.region === "New Terriroties"
+            ? "New Territories"
+            : data[i].Region &&
+              el.location.toLowerCase() ===
+                data[i].Location!.trim().toLowerCase()
+        );
+        if (!found) {
           region.push(data[i].Region);
+          let districtData = {
+            region:
+              data[i].Region === "New Terriroties"
+                ? "New Territories"
+                : data[i].Region,
+            location: data[i].Location!.trim(),
+          };
+          districtlist.push(districtData);
         }
       }
-      setDistrict(region);
-      console.log("regio", region);
-      let locList: any = [];
-      // data.forEach(function (loc) {
-      //   if (loc.Region === val && locList.indexOf(loc.Location) < 0) {
-      //     let res = self.convert(loc);
-      //     locList.push(res.Location);
-      //   }
-      // });
+      districtlist.sort((a: any, b: any) => (a.region > b.region ? 1 : -1));
+      setDistrict(districtlist);
     });
   }, []);
 
   const handleChangePage = (event: any, value: number) => {
     setPage(value);
-    setPageData(cvsData?.slice((value - 1) * 10, (value - 1) * 10 + 10));
+    setPageData(showData?.slice((value - 1) * 10, (value - 1) * 10 + 10));
   };
 
-  const handleFilter = (event: object, value: FilterKey | FilterKey[]) => {
-    console.log("value", value);
-  };
+  async function handleFilter(event: object, value: any) {
+    let data: any = [];
+    if (value.length > 0) {
+      data = await cvsData.filter((csitem: any) =>
+        value.map((item: any) => item.location).includes(csitem.Location)
+      );
+    } else {
+      data = cvsData;
+    }
+    setPage(1);
+    setShowData(data);
+    setPageData(data?.slice(0, 10));
+  }
 
   return (
-    <Grid className={classes.container}>
-      <Grid item md={4} sm={12} xs={12} className={classes.filter}>
-        <EditableList district={district} handleFilter={handleFilter} />
-      </Grid>
+    <React.Fragment>
+      <Grid className={classes.container}>
+        <Grid item md={4} sm={12} xs={12} className={classes.filter}>
+          <EditableList district={district} handleFilter={handleFilter} />
+        </Grid>
+        <Grid container spacing={4}>
+          {pageData.length > 0 &&
+            pageData.map((data: Doctor, index: number) => (
+              <Grid item key={index} md={6} sm={12} xs={12}>
+                <DoctorData data={data} />
+              </Grid>
+            ))}
+        </Grid>
 
-      <Grid container spacing={4}>
-        {pageData.length > 0 &&
-          pageData.map((data: Doctor, index: number) => (
-            <Grid item key={index} md={6} sm={12} xs={12}>
-              <DoctorData data={data} />
-            </Grid>
-          ))}
+        <Grid container justifyContent="center" className={classes.pagination}>
+          <Pagination
+            count={
+              showData?.length % 10 !== 0
+                ? Math.floor(showData?.length / 10) + 1
+                : showData?.length / 10
+            }
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Grid>
       </Grid>
-
-      <Grid container justifyContent="center" className={classes.pagination}>
-        <Pagination
-          count={
-            cvsData?.length % 10 !== 0
-              ? Math.floor(cvsData?.length / 10) + 1
-              : cvsData?.length / 10
-          }
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-        />
-      </Grid>
-    </Grid>
+    </React.Fragment>
   );
 }
 export default DoctorListPage;
