@@ -20,7 +20,7 @@ function EditableList() {
       renderInput={(params) => (
         <TextField
           {...params}
-          variant="standard"
+          variant="outlined"
           label="Multiple values"
           placeholder="Favorites"
         />
