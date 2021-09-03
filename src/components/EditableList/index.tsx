@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 //Material-UI
 import { Grid, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+//Interface
 import { FilterKey } from "../../types/interfaces";
 
 interface Props {

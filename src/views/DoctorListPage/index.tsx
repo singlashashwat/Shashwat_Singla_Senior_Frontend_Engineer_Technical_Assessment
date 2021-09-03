@@ -2,14 +2,24 @@ import React, { useEffect, useState } from "react";
 //Material-UI
 import { Grid, makeStyles } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
-import { csv, DSVRowArray } from "d3";
+//CSV
+import { csv } from "d3";
+//OtherComponents
 import EditableList from "../../components/EditableList";
 import DoctorData from "./DoctorData";
+//Interface
+import { Doctor, FilterKey } from "../../types/interfaces";
 // @ts-ignore
 import csvFilePath from "./doctors.csv";
-import { Doctor, FilterKey } from "../../types/interfaces";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: "50px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "10px",
+    },
+  },
+}));
 function DoctorListPage() {
   const classes = useStyles();
   const [cvsData, setCsvData] = useState<any>();
@@ -50,29 +60,31 @@ function DoctorListPage() {
 
   return (
     <React.Fragment>
-      <Grid item md={4} sm={12} xs={12}>
-        <EditableList district={district} handleFilter={handleFilter} />
-      </Grid>
-      <Grid container spacing={4}>
-        {pageData.length > 0 &&
-          pageData.map((data: Doctor, index: number) => (
-            <Grid item key={index} md={6} sm={12} xs={12}>
-              <DoctorData data={data} />
-            </Grid>
-          ))}
-      </Grid>
+      <Grid className={classes.container}>
+        <Grid item md={4} sm={12} xs={12}>
+          <EditableList district={district} handleFilter={handleFilter} />
+        </Grid>
+        <Grid container spacing={4}>
+          {pageData.length > 0 &&
+            pageData.map((data: Doctor, index: number) => (
+              <Grid item key={index} md={6} sm={12} xs={12}>
+                <DoctorData data={data} />
+              </Grid>
+            ))}
+        </Grid>
 
-      <Grid container justifyContent="center">
-        <Pagination
-          count={
-            cvsData?.length % 10 !== 0
-              ? Math.floor(cvsData?.length / 10) + 1
-              : cvsData?.length / 10
-          }
-          page={page}
-          onChange={handleChangePage}
-          color="primary"
-        />
+        <Grid container justifyContent="center">
+          <Pagination
+            count={
+              cvsData?.length % 10 !== 0
+                ? Math.floor(cvsData?.length / 10) + 1
+                : cvsData?.length / 10
+            }
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Grid>
       </Grid>
     </React.Fragment>
   );
