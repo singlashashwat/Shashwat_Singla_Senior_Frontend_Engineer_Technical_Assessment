@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
       padding: "10px",
     },
   },
+  filter: {
+    marginBottom: "30px",
+  },
+  pagination: {
+    marginTop: "30px",
+  },
 }));
 function DoctorListPage() {
   const classes = useStyles();
@@ -59,34 +65,33 @@ function DoctorListPage() {
   };
 
   return (
-    <React.Fragment>
-      <Grid className={classes.container}>
-        <Grid item md={4} sm={12} xs={12}>
-          <EditableList district={district} handleFilter={handleFilter} />
-        </Grid>
-        <Grid container spacing={4}>
-          {pageData.length > 0 &&
-            pageData.map((data: Doctor, index: number) => (
-              <Grid item key={index} md={6} sm={12} xs={12}>
-                <DoctorData data={data} />
-              </Grid>
-            ))}
-        </Grid>
-
-        <Grid container justifyContent="center">
-          <Pagination
-            count={
-              cvsData?.length % 10 !== 0
-                ? Math.floor(cvsData?.length / 10) + 1
-                : cvsData?.length / 10
-            }
-            page={page}
-            onChange={handleChangePage}
-            color="primary"
-          />
-        </Grid>
+    <Grid className={classes.container}>
+      <Grid item md={4} sm={12} xs={12} className={classes.filter}>
+        <EditableList district={district} handleFilter={handleFilter} />
       </Grid>
-    </React.Fragment>
+
+      <Grid container spacing={4}>
+        {pageData.length > 0 &&
+          pageData.map((data: Doctor, index: number) => (
+            <Grid item key={index} md={6} sm={12} xs={12}>
+              <DoctorData data={data} />
+            </Grid>
+          ))}
+      </Grid>
+
+      <Grid container justifyContent="center" className={classes.pagination}>
+        <Pagination
+          count={
+            cvsData?.length % 10 !== 0
+              ? Math.floor(cvsData?.length / 10) + 1
+              : cvsData?.length / 10
+          }
+          page={page}
+          onChange={handleChangePage}
+          color="primary"
+        />
+      </Grid>
+    </Grid>
   );
 }
 export default DoctorListPage;
