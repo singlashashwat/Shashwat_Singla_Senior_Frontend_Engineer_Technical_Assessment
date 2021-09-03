@@ -11,25 +11,16 @@ interface Props {
 }
 function EditableList(props: Props) {
   const { district, handleFilter } = props;
-  let data = [
-    { region: "New Terriroties", location: "Tsing Yi" },
-    { region: "New Terriroties", location: "Tai Po" },
-    { region: "Kowloon", location: "Mongkok" },
-  ];
+
   return (
     <Autocomplete
       multiple
-      options={district ? district : data}
+      options={district}
       onChange={handleFilter}
       groupBy={(option) => option.region}
       getOptionLabel={(option) => option.location}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          variant="outlined"
-          label="Multiple values"
-          placeholder="Favorites"
-        />
+        <TextField {...params} variant="outlined" label="District" />
       )}
     />
   );
