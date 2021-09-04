@@ -48,13 +48,17 @@ function DoctorData(props: Props) {
           />
         ))}
 
-      <Typography>
+      <Typography gutterBottom>
         <LocationOnIcon className={classes.address} />
         {data?.Address1 + "," + data?.Address2}
       </Typography>
 
-      <Typography variant="body2" className={classes.text}>
+      <Typography variant="body2" gutterBottom className={classes.text}>
         {data?.Telephone1}
+      </Typography>
+
+      <Typography variant="body2" gutterBottom className={classes.text}>
+        Member exclusive price:
       </Typography>
     </React.Fragment>
   );

@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { FilterKey } from "../../types/interfaces";
 
 interface Props {
-  district: any;
+  district: FilterKey[];
   handleFilter: (event: object, value: FilterKey | FilterKey[]) => void;
 }
 function EditableList(props: Props) {

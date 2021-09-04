@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 //CSV
-import { csv } from "d3";
+import { csv, DSVRowArray } from "d3";
 //OtherComponents
 import EditableList from "../../components/EditableList";
 import DoctorData from "./DoctorData";
@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-let cvsData: any = "";
+let cvsData: DSVRowArray<string>;
 function DoctorListPage() {
   const classes = useStyles();
-  const [showData, setShowData] = useState<any>();
+  const [showData, setShowData] = useState<DSVRowArray<string>>();
   const [pageData, setPageData] = useState<any>([]);
-  const [district, setDistrict] = useState<string[]>([]);
+  const [district, setDistrict] = useState<FilterKey[]>([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -67,14 +67,14 @@ function DoctorListPage() {
     });
   }, []);
 
-  const handleChangePage = (event: any, value: number) => {
+  const handleChangePage = (event: object, value: number) => {
     setPage(value);
     setPageData(showData?.slice((value - 1) * 10, (value - 1) * 10 + 10));
   };
 
   async function handleFilter(event: object, value: any) {
     let data: any = [];
-    if (value.length > 0) {
+    if (value && value?.length > 0) {
       data = await cvsData.filter((csitem: any) =>
         value.map((item: any) => item.location).includes(csitem.Location)
       );
@@ -104,9 +104,11 @@ function DoctorListPage() {
         <Grid container justifyContent="center" className={classes.pagination}>
           <Pagination
             count={
-              showData?.length % 10 !== 0
-                ? Math.floor(showData?.length / 10) + 1
-                : showData?.length / 10
+              showData
+                ? showData?.length % 10 !== 0
+                  ? Math.floor(showData?.length / 10) + 1
+                  : showData?.length / 10
+                : 0
             }
             page={page}
             onChange={handleChangePage}
