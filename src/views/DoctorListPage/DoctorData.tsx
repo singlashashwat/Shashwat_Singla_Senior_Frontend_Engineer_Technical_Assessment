@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 //Material-UI
 import { Divider, Typography, makeStyles, Chip } from "@material-ui/core";
 import LocationOnIcon from "@material-ui/icons/LocationOn";

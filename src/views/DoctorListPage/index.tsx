@@ -36,10 +36,12 @@ function DoctorListPage() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    // Read file
     csv(csvFilePath).then((data) => {
       cvsData = data;
       setShowData(data);
       setPageData(data?.slice(0, 10));
+      // Create data for filter district
       let region: any = [];
       let districtlist: any = [];
       for (var i = 0; i < data.length; i++) {
@@ -92,6 +94,7 @@ function DoctorListPage() {
         <Grid item md={4} sm={12} xs={12} className={classes.filter}>
           <EditableList district={district} handleFilter={handleFilter} />
         </Grid>
+
         <Grid container spacing={4}>
           {pageData.length > 0 &&
             pageData.map((data: Doctor, index: number) => (
