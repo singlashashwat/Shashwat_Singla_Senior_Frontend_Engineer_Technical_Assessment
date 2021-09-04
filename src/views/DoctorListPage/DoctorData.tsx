@@ -6,8 +6,12 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { Doctor } from "../../types/interfaces";
 
 const useStyles = makeStyles((theme) => ({
+  name: {
+    marginTop: "0.35em",
+  },
   address: {
-    fontSize: "1.25rem",
+    fontSize: "1rem",
+    color: "red",
   },
   text: {
     color: "#707188",
@@ -30,7 +34,7 @@ function DoctorData(props: Props) {
     <React.Fragment>
       <Divider />
 
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom className={classes.name}>
         {data?.Name}
       </Typography>
 
@@ -44,8 +48,8 @@ function DoctorData(props: Props) {
           />
         ))}
 
-      <Typography className={classes.address}>
-        <LocationOnIcon fontSize={"small"} />
+      <Typography>
+        <LocationOnIcon className={classes.address} />
         {data?.Address1 + "," + data?.Address2}
       </Typography>
 
