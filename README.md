@@ -28,7 +28,7 @@ use github to version control and submit the code. Github-pages will make easile
 
 Potentional Improvement: 
 
-We can add Redux on this project.
+We can add `Redux` on this project.
 We can try to improve project and code structure if more time given.
 We can add CI/CD part on the project, so whenever there is new commit it will start showing on site.
 
