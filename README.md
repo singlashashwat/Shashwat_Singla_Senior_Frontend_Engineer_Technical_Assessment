@@ -1,46 +1,39 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
-
-### `yarn start`
+### `npm install`
+### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Packages
 
-### `yarn test`
+### `Material ui`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Material-UI is simply a library that allows us to import and use different components to create a user interface in our React applications. This saves a significant amount of time since the developers do not need to write everything from scratch.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `d3`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+D3 is simply helps to react the Csv data and later we can use same library to statistical view of data if required.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `Typescript`
 
-### `yarn eject`
+TypeScript is a superset of JavaScript which primarily provides optional static typing, classes, and interfaces. It helps the developer to highlight the errors as early as possible.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `gh-pages`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+use github to version control and submit the code. Github-pages will make easiler to deploy the site.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Potentional Improvement: 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+We can add Redux on this project.
+We can try to improve project and code structure if more time given.
+We can add CI/CD part on the project, so whenever there is new commit it will start showing on site.
 
-## Learn More
+Assumptions:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+We have assumed that `State Management` is not required for this project.
+I have used Short form of Service Type. Please do let me know the full forms of each service type if required.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
