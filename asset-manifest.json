@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/css/main.1c79490d.chunk.css",
+    "main.js": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/main.2cc2ac59.chunk.js",
+    "main.js.map": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/main.2cc2ac59.chunk.js.map",
+    "runtime-main.js": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/runtime-main.6b23e1ff.js",
+    "runtime-main.js.map": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/runtime-main.6b23e1ff.js.map",
+    "static/js/2.a265bf35.chunk.js": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/2.a265bf35.chunk.js",
+    "static/js/2.a265bf35.chunk.js.map": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/2.a265bf35.chunk.js.map",
+    "static/js/3.0cbb33c5.chunk.js": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/3.0cbb33c5.chunk.js",
+    "static/js/3.0cbb33c5.chunk.js.map": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/3.0cbb33c5.chunk.js.map",
+    "index.html": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/index.html",
+    "static/css/main.1c79490d.chunk.css.map": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/css/main.1c79490d.chunk.css.map",
+    "static/js/2.a265bf35.chunk.js.LICENSE.txt": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/js/2.a265bf35.chunk.js.LICENSE.txt",
+    "static/media/doctors.aec49c89.csv": "/Shashwat_Singla_Senior_Frontend_Engineer_Technical_Assessment/static/media/doctors.aec49c89.csv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6b23e1ff.js",
+    "static/js/2.a265bf35.chunk.js",
+    "static/css/main.1c79490d.chunk.css",
+    "static/js/main.2cc2ac59.chunk.js"
+  ]
+}
