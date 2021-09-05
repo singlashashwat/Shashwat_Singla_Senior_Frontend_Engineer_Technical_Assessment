@@ -6,7 +6,7 @@ import { FilterKey } from "../../types/interfaces";
 
 interface Props {
   district: FilterKey[];
-  handleFilter: (event: object, value: FilterKey | FilterKey[]) => void;
+  handleFilter: (event: object, value: FilterKey[]) => void;
 }
 function EditableList(props: Props) {
   const { district, handleFilter } = props;

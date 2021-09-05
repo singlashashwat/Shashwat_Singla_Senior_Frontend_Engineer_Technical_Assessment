@@ -43,9 +43,9 @@ function DoctorListPage() {
       setPageData(data?.slice(0, 10));
       // Create data for filter district
       let region: any = [];
-      let districtlist: any = [];
-      for (var i = 0; i < data.length; i++) {
-        const found: any = districtlist.some((el: any) =>
+      let districtlist: FilterKey[] = [];
+      for (let i = 0; i < data.length; i++) {
+        const found: boolean = districtlist.some((el: FilterKey) =>
           el.region === "New Terriroties"
             ? "New Territories"
             : data[i].Region &&
@@ -54,17 +54,19 @@ function DoctorListPage() {
         );
         if (!found) {
           region.push(data[i].Region);
-          let districtData = {
+          let districtData: FilterKey = {
             region:
               data[i].Region === "New Terriroties"
                 ? "New Territories"
-                : data[i].Region,
+                : (data[i].Region as string),
             location: data[i].Location!.trim(),
           };
           districtlist.push(districtData);
         }
       }
-      districtlist.sort((a: any, b: any) => (a.region > b.region ? 1 : -1));
+      districtlist.sort((a: FilterKey, b: FilterKey) =>
+        a.region > b.region ? 1 : -1
+      );
       setDistrict(districtlist);
     });
   }, []);
@@ -74,11 +76,11 @@ function DoctorListPage() {
     setPageData(showData?.slice((value - 1) * 10, (value - 1) * 10 + 10));
   };
 
-  async function handleFilter(event: object, value: any) {
-    let data: any = [];
+  const handleFilter = async (event: object, value: FilterKey[]) => {
+    let data: any;
     if (value && value?.length > 0) {
-      data = await cvsData.filter((csitem: any) =>
-        value.map((item: any) => item.location).includes(csitem.Location)
+      data = await cvsData?.filter((csitem: any) =>
+        value.map((item: FilterKey) => item.location).includes(csitem.Location)
       );
     } else {
       data = cvsData;
@@ -86,7 +88,7 @@ function DoctorListPage() {
     setPage(1);
     setShowData(data);
     setPageData(data?.slice(0, 10));
-  }
+  };
 
   return (
     <React.Fragment>

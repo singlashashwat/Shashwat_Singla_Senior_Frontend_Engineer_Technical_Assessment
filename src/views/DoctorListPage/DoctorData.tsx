@@ -20,6 +20,10 @@ const useStyles = makeStyles(() => ({
     marginRight: "5px",
     marginBottom: "5px",
   },
+  time: {
+    color: "#707188",
+    marginTop: "0.35em",
+  },
 }));
 interface Props {
   data: Doctor;
@@ -89,14 +93,15 @@ function DoctorData(props: Props) {
 
       {service_type.length > 0 &&
         service_type.map((item, i) => (
-          <Typography variant="body2" gutterBottom className={classes.text}>
+          <Typography variant="body2" className={classes.text}>
             {item}: ${price[i]}
             {!medicine[i] || medicine[i] === "NA"
               ? "(not inclusive medicine)"
               : "(inclusive " + medicine[i] + " Days of " + item + " medicine)"}
           </Typography>
         ))}
-      <Typography variant="body2" gutterBottom className={classes.text}>
+
+      <Typography variant="body2" gutterBottom className={classes.time}>
         {getloop1 > 0
           ? weekdays
               .slice(0, getloop1)
